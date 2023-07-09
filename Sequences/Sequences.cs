@@ -21,7 +21,30 @@ namespace Sequences
         /// </exception>
         public static string[] GetSubstrings(string numbers, int length)
         {
-            throw new NotImplementedException("You need to implement this method.");
+            if (string.IsNullOrWhiteSpace(numbers))
+            {
+                throw new ArgumentException("Source string cannot be null, empty, or whitespace.");
+            }
+
+            if (length <= 0 || length > numbers.Length)
+            {
+                throw new ArgumentException("Length of substring is invalid.");
+            }
+
+            if (!numbers.All(char.IsDigit))
+            {
+                throw new ArgumentException("Source string contains non-digit characters.");
+            }
+
+            List<string> substrings = new List<string>();
+
+            for (int i = 0; i <= numbers.Length - length; i++)
+            {
+                string substring = numbers.Substring(i, length);
+                substrings.Add(substring);
+            }
+
+            return substrings.ToArray();
         }
     }
 }
